@@ -782,6 +782,21 @@
     border-top: 1px solid var(--line);
   }
 
+  .case-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .case-links .founder-portfolio-btn { margin-top: 0; }
+  .case-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    margin: 0 !important;
+  }
+
   .case-cta {
     display: flex;
     align-items: center;
