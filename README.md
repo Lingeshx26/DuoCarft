@@ -4,7 +4,8 @@
 
 DuoCraft is a two-person freelance web studio run by [Lingesh A](https://lingeshx26.github.io/portfolio-react/) (full-stack & backend) and [Kavitha K](https://kavitha0406.github.io/Kavithaportfolio/) (QA & frontend), based in Tamil Nadu, India. This repo is the source for our site.
 
-🔗 **Live site:** https://lingeshx26.github.io/DuoCarft/
+🔗 **Live site:** https://duocraft.online/
+🔗 **GitHub Pages URL:** https://lingeshx26.github.io/DuoCarft/
 
 ---
 
@@ -25,6 +26,7 @@ DuoCraft is a two-person freelance web studio run by [Lingesh A](https://lingesh
 - Gig Driver Dashboard — a personal PWA project (GPS ride tracking, Google Sheets sync), with links to the live demo and source code
 
 **Site-wide**
+- **Custom domain** — live at duocraft.online, with HTTPS enforced
 - **Dark / light mode** — toggle in the nav, remembers the visitor's choice (`localStorage`), respects system preference on first visit
 - **Mobile-friendly nav** — hamburger menu on small screens, grouped with the theme toggle
 - **Hash-free navigation** — section links (Reviews, Contact, etc.) never show a `#hash` in the address bar, even across pages
@@ -37,24 +39,25 @@ DuoCraft is a two-person freelance web studio run by [Lingesh A](https://lingesh
 Plain HTML, CSS, and vanilla JavaScript — no build step, no frameworks. Fonts via Google Fonts (Space Grotesk, IBM Plex Sans, IBM Plex Mono).
 
 ```
-DuoCraft/
-├── assets/              ← folder (like "public" in that example)
-│   ├── duocraft-badge.png
-│   ├── duocraft-wordmark.png
-│   ├── favicon.ico
-│   ├── apple-touch-icon.png
-│   ├── aj-travels-front.png
-│   ├── aj-travels-back.png
-│   └── aj-travels-mockup.png
+duocraft/
 ├── index.html
 ├── work.html
 ├── services.html
 ├── style.css
 ├── script.js
-└── README.md
+├── CNAME
+├── README.md
+└── assets/
+    ├── favicon.ico
+    ├── apple-touch-icon.png
+    ├── duocraft-badge.png
+    ├── duocraft-wordmark.png
+    ├── aj-travels-front.png
+    ├── aj-travels-back.png
+    └── aj-travels-mockup.png
 ```
 
-> All files live at the repo root — no subfolders. HTML references images directly (e.g. `src="duocraft-badge.png"`).
+> All images live inside `assets/`. HTML references them accordingly (e.g. `src="assets/duocraft-badge.png"`). The three HTML pages themselves stay at the repo root.
 
 ## Running locally
 
@@ -78,6 +81,15 @@ Then open `http://localhost:8000`.
 4. Save — your site will be live at `https://<username>.github.io/<repo-name>/` within a minute or two.
 
 **Heads up:** GitHub Pages is case-sensitive and doesn't tolerate spaces in filenames the way Windows does. Keep new filenames lowercase and hyphenated, and make sure paths in the HTML match exactly.
+
+## Custom domain (duocraft.online)
+
+The domain is registered with Hostinger and points at GitHub Pages via:
+- 4 `A` records on `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+- 1 `CNAME` record on `www` → `lingeshx26.github.io`
+- A `CNAME` file in this repo containing `duocraft.online`, plus the custom domain set under **Settings → Pages**
+
+HTTPS is enforced once GitHub finishes issuing the certificate (automatic, can take a few minutes to ~24 hours after DNS first connects).
 
 ## Contact
 
