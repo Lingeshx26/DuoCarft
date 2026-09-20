@@ -37,19 +37,21 @@ DuoCraft is a two-person freelance web studio run by [Lingesh A](https://lingesh
 Plain HTML, CSS, and vanilla JavaScript — no build step, no frameworks. Fonts via Google Fonts (Space Grotesk, IBM Plex Sans, IBM Plex Mono).
 
 ```
-duocraft/
+DuoCraft/
+├── assets/              ← folder (like "public" in that example)
+│   ├── duocraft-badge.png
+│   ├── duocraft-wordmark.png
+│   ├── favicon.ico
+│   ├── apple-touch-icon.png
+│   ├── aj-travels-front.png
+│   ├── aj-travels-back.png
+│   └── aj-travels-mockup.png
 ├── index.html
 ├── work.html
 ├── services.html
 ├── style.css
 ├── script.js
-├── favicon.ico
-├── apple-touch-icon.png
-├── duocraft-badge.png
-├── duocraft-wordmark.png
-├── aj-travels-front.png
-├── aj-travels-back.png
-└── aj-travels-mockup.png
+└── README.md
 ```
 
 > All files live at the repo root — no subfolders. HTML references images directly (e.g. `src="duocraft-badge.png"`).
