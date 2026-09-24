@@ -12,12 +12,14 @@ DuoCraft is a two-person freelance web studio run by [Lingesh A](https://lingesh
 ## What's on the site
 
 **Home (`index.html`)**
-- Hero, a 3-card "What we do" teaser with a link to the full services page, and reviews (placeholder until we have real ones)
+- Hero, a 3-card "What we do" teaser (Landing pages, Full websites, Modern UI design) with a link to the full services page, and reviews (placeholder until we have real ones)
+  - Each card has a preview cover: a real screenshot for Landing pages and Full websites, a looping video for Modern UI design
 - Who we are — founder bios with initials avatars, skill chips, and links to each founder's personal portfolio
 - How we work — our 4-step process, and the tools/stack we use
 
 **What we do (`services.html`)**
 - Full services catalog, grouped into Websites & Web Apps, Design, and Marketing & Growth
+- Websites & Web Apps includes Landing pages, Full websites, Modern UI design, Remodelling existing sites, E-commerce sites, and Food & cloud kitchen ordering sites
 - A "Coming Soon" section for services in the pipeline (YouTube thumbnails, video/photo editing, social content design)
 
 **Our work (`work.html`)**
@@ -43,10 +45,14 @@ duocraft/
 ├── index.html
 ├── work.html
 ├── services.html
+├── demos.html
 ├── style.css
 ├── script.js
 ├── CNAME
 ├── README.md
+├── demo-sites/
+│   └── kudil-ladies-hostel/
+│       └── index.html
 └── assets/
     ├── favicon.ico
     ├── apple-touch-icon.png
@@ -54,10 +60,15 @@ duocraft/
     ├── duocraft-wordmark.png
     ├── aj-travels-front.png
     ├── aj-travels-back.png
-    └── aj-travels-mockup.png
+    ├── aj-travels-mockup.png
+    ├── Landing page/
+    │   └── Landing page preview.mp4
+    └── services/
+        ├── landing-pages-cover.jpg
+        └── full-websites-cover.png
 ```
 
-> All images live inside `assets/`. HTML references them accordingly (e.g. `src="assets/duocraft-badge.png"`). The three HTML pages themselves stay at the repo root.
+> All images live inside `assets/`. HTML references them accordingly (e.g. `src="assets/duocraft-badge.png"`, `src="assets/services/landing-pages-cover.jpg"`). The HTML pages themselves stay at the repo root, except the live landing page demos, which sit under `demo-sites/<demo-name>/`.
 
 ## Running locally
 
