@@ -8,12 +8,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="assets/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/duocraft/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/duocraft/apple-touch-icon.png">
 <script>
   (function() {
     var saved = localStorage.getItem('duocraft-theme');
-    var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var theme = saved || 'light';
     document.documentElement.setAttribute('data-theme', theme);
   })();
 </script>
@@ -23,7 +23,7 @@
 <header id="site-header">
   <div class="wrap nav">
     <a class="nav-mark" href="./">
-      <img class="brand-badge" src="assets/duocraft-badge.png" alt="DuoCraft" width="40" height="24">
+      <img class="brand-badge" src="assets/duocraft/duocraft-badge.png" alt="DuoCraft" width="40" height="24">
       DuoCraft
     </a>
     <nav class="nav-links" id="nav-links">
@@ -34,9 +34,14 @@
       <a href="#contact" data-section="contact">Contact</a>
     </nav>
     <div class="nav-controls">
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+      <button class="theme-switch" id="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark mode">
+        <span class="theme-switch-thumb"></span>
+        <span class="theme-switch-icon theme-switch-icon-sun">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </span>
+        <span class="theme-switch-icon theme-switch-icon-moon">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        </span>
       </button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
@@ -49,19 +54,29 @@
   <div class="wrap">
     <div class="section-head reveal">
       <h2 class="section-title">Our work</h2>
-      <p class="section-note">Real projects we've built — sorted by type, growing as we complete more.</p>
+      <p class="section-note">Pick a folder to see what's inside — grows as we complete more.</p>
     </div>
     <div class="filter-chips reveal" id="filter-chips">
-      <button class="filter-chip is-active" data-filter="all">All</button>
       <button class="filter-chip" data-filter="business-cards">Business Cards</button>
       <button class="filter-chip" data-filter="web-apps">Web Apps</button>
+      <button class="filter-chip" data-filter="social">Brand &amp; Social</button>
     </div>
   </div>
 </section>
 
+<div class="work-placeholder" id="work-placeholder">
+  <div class="work-placeholder-stage">
+    <div class="work-placeholder-glow"></div>
+    <div class="hero-logo-spin">
+      <img src="assets/duocraft/duocraft-badge.png" alt="DuoCraft logo">
+    </div>
+  </div>
+  <p class="work-placeholder-note">Pick a folder above to open it</p>
+</div>
+
 <section class="section case-study">
   <div class="wrap">
-    <div class="case-card tilt-card reveal" data-category="business-cards">
+    <div class="case-card tilt-card reveal is-hidden" data-category="business-cards">
       <div class="case-head">
         <div>
           <h3>AJ Travels — Business Card Design</h3>
@@ -76,24 +91,76 @@
           <li>Back side — full service list (family functions, temple trips, outstation, airport pickup, car delivery, tours, and more), plus a 24/7 availability badge</li>
           <li>Print-ready file, delivered ready to hand to a printer</li>
         </ul>
-        <div class="case-gallery">
-          <figure>
-            <img src="assets/aj-travels-front.png" alt="AJ Travels business card, front side, with logo, tagline and contact numbers">
-            <figcaption>Front — brand &amp; contact details</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/aj-travels-back.png" alt="AJ Travels business card, back side, listing all services offered">
-            <figcaption>Back — full service list</figcaption>
-          </figure>
-          <figure class="wide">
-            <img src="assets/aj-travels-mockup.png" alt="Printed AJ Travels business cards resting on a wooden table">
-            <figcaption>Final printed mockup</figcaption>
-          </figure>
+        <div class="case-gallery-wrap">
+          <button class="gallery-nav gallery-nav-prev" type="button" aria-label="Scroll images left">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <div class="case-gallery">
+            <figure>
+              <img src="assets/aj-travels/aj-travels-front.png" alt="AJ Travels business card, front side, with logo, tagline and contact numbers">
+              <figcaption>Front — brand &amp; contact details</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/aj-travels/aj-travels-back.png" alt="AJ Travels business card, back side, listing all services offered">
+              <figcaption>Back — full service list</figcaption>
+            </figure>
+            <figure class="wide">
+              <img src="assets/aj-travels/aj-travels-mockup.png" alt="Printed AJ Travels business cards resting on a wooden table">
+              <figcaption>Final printed mockup</figcaption>
+            </figure>
+          </div>
+          <button class="gallery-nav gallery-nav-next" type="button" aria-label="Scroll images right">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="case-card tilt-card reveal" data-category="web-apps">
+    <div class="case-card tilt-card reveal is-hidden" data-category="business-cards">
+      <div class="case-head">
+        <div>
+          <h3>DuoCraft — Our Own Business Card</h3>
+          <p class="case-meta">Our own studio &middot; Coimbatore &amp; Virudhunagar, Tamil Nadu</p>
+        </div>
+        <span class="case-tag">Print design</span>
+      </div>
+      <div class="case-body">
+        <p>We designed our own card the same way we'd design one for a client — and gave it both a light and a dark version, just like the theme toggle on this site.</p>
+        <ul>
+          <li>Front — logo, tagline, and location</li>
+          <li>Back — full service list, plus Instagram, WhatsApp, and website details</li>
+          <li>Two finishes — light and dark, so it works wherever we hand it out</li>
+        </ul>
+        <div class="case-gallery-wrap">
+          <button class="gallery-nav gallery-nav-prev" type="button" aria-label="Scroll images left">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+          </button>
+          <div class="case-gallery">
+          <figure>
+            <img src="assets/duocraft-cards/duocraft-card-front-light.png" alt="DuoCraft business card, front side, light version">
+            <figcaption>Front — light</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/duocraft-cards/duocraft-card-back-light.png" alt="DuoCraft business card, back side, light version, listing services and socials">
+            <figcaption>Back — light</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/duocraft-cards/duocraft-card-front-dark.png" alt="DuoCraft business card, front side, dark version">
+            <figcaption>Front — dark</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/duocraft-cards/duocraft-card-back-dark.png" alt="DuoCraft business card, back side, dark version, listing services and socials">
+            <figcaption>Back — dark</figcaption>
+          </figure>
+          </div>
+          <button class="gallery-nav gallery-nav-next" type="button" aria-label="Scroll images right">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-card tilt-card reveal is-hidden" data-category="web-apps">
       <div class="case-head">
         <div>
           <h3>Gig Driver Dashboard — Personal Tool</h3>
@@ -128,6 +195,39 @@
       </div>
     </div>
 
+    <div class="case-card tilt-card reveal is-hidden" data-category="social">
+      <div class="case-head">
+        <div>
+          <h3>DuoCraft's Brand &amp; Social Presence</h3>
+          <p class="case-meta">Where we show up beyond the website</p>
+        </div>
+        <span class="case-tag">Brand &amp; community</span>
+      </div>
+      <div class="case-body">
+        <p>Our website isn't the only place we exist — we run an Instagram page for behind-the-scenes and updates, and a Discord server for client support and community, both built and managed in-house.</p>
+        <ul>
+          <li>Instagram — project updates, behind-the-scenes, and quick inquiries</li>
+          <li>Discord — a home base for client support and community chat</li>
+        </ul>
+        <div class="case-links">
+          <a class="founder-portfolio-btn" href="https://www.instagram.com/duocraftdigital/" target="_blank" rel="noopener noreferrer">
+            <span class="case-link-icon case-link-icon-instagram">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"></circle></svg>
+            </span>
+            View Instagram
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+          </a>
+          <a class="founder-portfolio-btn" href="https://discord.gg/f6azs8ydrj" target="_blank" rel="noopener noreferrer">
+            <span class="case-link-icon case-link-icon-discord">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="#fff" stroke="none"><path d="M20.3 5.4A17 17 0 0 0 15.9 4l-.3.6a15 15 0 0 1 3.9 1.4c-2.6-1.3-5.2-1.3-7.7 0h0c-2.5-1.3-5.1-1.3-7.7 0A15 15 0 0 1 8 4.6L7.7 4A17 17 0 0 0 3.3 5.4C.9 9 .1 12.5.5 16a17 17 0 0 0 5.1 2.6l.7-1.1a11 11 0 0 1-1.8-.9l.4-.3c3.5 1.6 7.3 1.6 10.8 0l.4.3c-.6.3-1.2.6-1.8.9l.7 1.1A17 17 0 0 0 20 16c.5-4-.5-7.4-2.7-10.6ZM8.7 14c-.8 0-1.5-.8-1.5-1.7s.6-1.7 1.5-1.7 1.5.8 1.5 1.7-.7 1.7-1.5 1.7Zm6.6 0c-.8 0-1.5-.8-1.5-1.7s.6-1.7 1.5-1.7 1.5.8 1.5 1.7-.6 1.7-1.5 1.7Z"></path></svg>
+            </span>
+            Join Discord
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M7 7h10v10"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="case-cta reveal">
       <p>Want something like this for your business?</p>
       <a class="btn btn-primary" href="#contact" data-section="contact">Start a project</a>
@@ -138,7 +238,7 @@
 <footer>
   <div class="wrap">
     <div style="display:flex; align-items:center; gap:10px;">
-      <img src="assets/duocraft-wordmark.png" alt="DuoCraft" style="height:32px; width:auto; display:block;">
+      <img src="assets/duocraft/duocraft-wordmark.png" alt="DuoCraft" style="height:32px; width:auto; display:block;">
       <span style="font-size:0.8rem; color:var(--text-muted);">Excuses not found.</span>
     </div>
     <span>DuoCraft © 2026</span>

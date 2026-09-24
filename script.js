@@ -20,10 +20,12 @@
   // Dark mode toggle
   var themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
+    themeToggle.setAttribute('aria-checked', document.documentElement.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
     themeToggle.addEventListener('click', function() {
       var root = document.documentElement;
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
+      themeToggle.setAttribute('aria-checked', next === 'dark' ? 'true' : 'false');
       try { localStorage.setItem('duocraft-theme', next); } catch (e) {}
     });
   }
@@ -68,7 +70,7 @@
   // elsewhere on the page can never block the others from working.
   var canHover = !reduceMotion && window.matchMedia('(hover: hover)').matches;
   if (canHover) {
-    var maxTilt = 6;
+    var maxTilt = 2.5;
 
     function attachTilt(card) {
       function onMove(e) {
@@ -134,21 +136,79 @@
   }
 })();
 
-// Work page — filter chips
+// Case-study image galleries — round prev/next scroll buttons
+(function() {
+  var wraps = document.querySelectorAll('.case-gallery-wrap');
+  wraps.forEach(function(wrap) {
+    var track = wrap.querySelector('.case-gallery');
+    var prevBtn = wrap.querySelector('.gallery-nav-prev');
+    var nextBtn = wrap.querySelector('.gallery-nav-next');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    function step() {
+      var first = track.querySelector('figure');
+      var gap = parseFloat(getComputedStyle(track).gap) || 16;
+      return first ? first.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+    }
+
+    function updateButtons() {
+      var maxScroll = track.scrollWidth - track.clientWidth - 1;
+      prevBtn.disabled = track.scrollLeft <= 0;
+      nextBtn.disabled = maxScroll <= 0 || track.scrollLeft >= maxScroll;
+    }
+
+    prevBtn.addEventListener('click', function() {
+      track.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', function() {
+      track.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+    track.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+
+    // Images load asynchronously, which changes track.scrollWidth after our
+    // first measurement — recheck once each image finishes, plus a couple
+    // of safety re-checks so the arrows never get stuck hidden.
+    updateButtons();
+    var imgs = track.querySelectorAll('img');
+    imgs.forEach(function(img) {
+      if (img.complete) return;
+      img.addEventListener('load', updateButtons);
+    });
+    window.addEventListener('load', updateButtons);
+    setTimeout(updateButtons, 300);
+    setTimeout(updateButtons, 1000);
+  });
+})();
+
+// Work page — folders (filter chips + rotating-logo placeholder)
 (function() {
   var chipBar = document.getElementById('filter-chips');
   if (!chipBar) return;
   var chips = chipBar.querySelectorAll('.filter-chip');
   var cards = document.querySelectorAll('.case-card[data-category]');
+  var placeholder = document.getElementById('work-placeholder');
+
+  function showPlaceholder() {
+    if (placeholder) placeholder.classList.remove('is-hidden');
+    cards.forEach(function(card) { card.classList.add('is-hidden'); });
+  }
 
   chips.forEach(function(chip) {
     chip.addEventListener('click', function() {
+      var alreadyActive = chip.classList.contains('is-active');
       chips.forEach(function(c) { c.classList.remove('is-active'); });
+
+      if (alreadyActive) {
+        showPlaceholder();
+        return;
+      }
+
       chip.classList.add('is-active');
+      if (placeholder) placeholder.classList.add('is-hidden');
       var filter = chip.getAttribute('data-filter');
       cards.forEach(function(card) {
-        var show = filter === 'all' || card.getAttribute('data-category') === filter;
-        card.classList.toggle('is-hidden', !show);
+        card.classList.toggle('is-hidden', card.getAttribute('data-category') !== filter);
       });
     });
   });
